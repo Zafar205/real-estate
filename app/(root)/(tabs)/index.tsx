@@ -1,7 +1,6 @@
 import { Text, View } from "react-native";
 import { Link } from "expo-router";
 
-
 export default function Index() {
     return (
         <View style={{
@@ -10,10 +9,18 @@ export default function Index() {
             alignItems: "center",
         }}>
             <Text className="text-lg my-10 font-rubik text-3xl"> Welcome to our app</Text>
-            <Link href="/sign-in">SignIn</Link>
-            <Link href="/explore">Explore</Link>
-            <Link href="/profile">Profile</Link>
-            <Link href="/properties/12">Properties</Link>
+            <Link href="/sign-in">
+              <Text>SignIn</Text>
+            </Link>
+            <Link href="/explore">
+              <Text>Explore</Text>
+            </Link>
+            <Link href="/profile">
+              <Text>Profile</Text>
+            </Link>
+            <Link href="/properties/12">
+              <Text>Properties</Text>
+            </Link>
         </View>
     );
 }

@@ -2,14 +2,12 @@ import { SplashScreen, Stack } from "expo-router";
 import { useFonts } from 'expo-font';
 import "./global.css";
 import { useEffect } from "react";
-
+import GlobalProvider from "@/lib/global-context";
 
 // Prevent the splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
 
-
 export default function RootLayout() {
-
   const [fontsLoaded] = useFonts({
     'Rubik-Bold': require('../assets/fonts/Rubik-Bold.ttf'),
     'Rubik-ExtraBold': require('../assets/fonts/Rubik-ExtraBold.ttf'),
@@ -18,20 +16,20 @@ export default function RootLayout() {
     'Rubik-SemiBold': require('../assets/fonts/Rubik-SemiBold.ttf'),
     'Rubik-Regular': require('../assets/fonts/Rubik-Regular.ttf'),
   });
-  
 
-  // This useEffect hook runs whenever the fontsLoaded state changes.If the fonts are loaded(fontsLoaded is true), 
-  // it hides the splash screen using SplashScreen.hideAsync().
-
-  // splash screen : the first screen when the app gets open
-    useEffect(() => {
-      if (fontsLoaded) {
-        SplashScreen.hideAsync();
-      }
-    }, [fontsLoaded])
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
 
   if (!fontsLoaded) {
     return null;
   }
-  return <Stack />;
+  
+  return (
+    <GlobalProvider>
+      <Stack screenOptions={{ headerShown: false }} />
+    </GlobalProvider>
+  );
 }
